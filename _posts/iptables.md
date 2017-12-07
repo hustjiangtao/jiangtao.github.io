@@ -1,3 +1,10 @@
+---
+layout: post
+title: iptables
+categories: [Life]
+tags: 生活
+---
+
 # Add self-conf
 *filter
 :INPUT ACCEPT [0:0]

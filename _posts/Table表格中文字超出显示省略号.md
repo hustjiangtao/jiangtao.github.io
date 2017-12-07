@@ -1,3 +1,10 @@
+---
+layout: post
+title: Table表格中文字超出显示省略号
+categories: [Life]
+tags: HTML
+---
+
 ## Table表格中文字超出显示省略号
 
 ---

@@ -1,3 +1,10 @@
+---
+layout: post
+title: 数据库MySQL
+categories: [数据库]
+tags: MySQL
+---
+
 ## 数据库MySQL
 
 ---

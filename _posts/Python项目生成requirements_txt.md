@@ -1,3 +1,10 @@
+---
+layout: post
+title: requirements.txt
+categories: [Life]
+tags: 生活
+---
+
 ### Python项目生成requirements.txt
 
 1. virtualenv环境

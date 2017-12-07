@@ -1,3 +1,10 @@
+---
+layout: post
+title: 安装supervisor
+categories: [Life]
+tags: 生活
+---
+
 # 安装supervisor
 
 ## 安装的时候要用yum install supervisor，

@@ -1,3 +1,10 @@
+---
+layout: post
+title: ssh配置
+categories: [Life]
+tags: 生活
+---
+
 ## linux系统下ssh配置方式：
 
 1. 文件复制或移动到目录：
