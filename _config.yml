@@ -1,0 +1,30 @@
+title: Jiangtao
+
+name: Jiangtao's homepage
+description:  I am Jiangtao. I completed my bachelor's degree in HuaZhong University of science and technology(HUST) of the civil engineering on July 1, 2016. So, sometimes I just call me myself a huster.
+url: http://hustjiangtao.com
+
+# 自定义post url
+permalink: /blog/:title.html
+timezone: Asia/Shanghai
+
+# Overriden by GitHub Pages: https://help.github.com/articles/using-jekyll-with-pages#configuring-jekyll
+safe: true
+lsi: false
+
+markdown: kramdown
+kramdown:
+    input: GFM # Enable GitHub Flavored Markdown (fenced code blocks)
+    extensions:
+    - autolink
+    - footnotes
+    - smart
+hard_wrap: false
+#  use_coderay: true
+syntax_highlighter: rouge
+#  coderay:
+#  coderay_line_numbers:  nil
+
+# White-listed plugins
+gems:
+  - jekyll-sitemap
