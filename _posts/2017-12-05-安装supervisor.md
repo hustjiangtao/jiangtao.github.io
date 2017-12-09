@@ -7,7 +7,7 @@ tags: Linux
 
 # 安装supervisor
 
-# 安装的时候要用yum install supervisor，
+** 安装的时候要用yum install supervisor **
 - 配置：vim /etc/supervisord.conf
 - 启动：service supervisord start
 - 管理：supervisorctl
