@@ -5,7 +5,7 @@ categories: [code]
 tags: Python
 ---
 
-### Python项目生成requirements.txt
+# Python项目生成requirements.txt
 
 1. virtualenv环境
 > 直接在项目目录下使用：pip freeze > requirements.txt
