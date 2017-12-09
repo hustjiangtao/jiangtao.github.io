@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 安装supervisor
-categories: [Life]
-tags: 生活
+categories: [code]
+tags: Linux
 ---
 
 # 安装supervisor

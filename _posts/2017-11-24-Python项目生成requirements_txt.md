@@ -1,8 +1,8 @@
 ---
 layout: post
 title: requirements.txt
-categories: [Life]
-tags: 生活
+categories: [code]
+tags: Python
 ---
 
 ### Python项目生成requirements.txt
