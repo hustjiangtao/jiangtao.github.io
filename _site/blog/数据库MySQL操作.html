@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="aexITLS38FdIRzwj25OVWxm87rpa9l-UV0URTyC9cTs" />
+  <title>
+    数据库MySQL
+    
+  </title>
+  <link rel="stylesheet" href="../css/site.css">
+  <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  
+  <link href="/blog/feed.xml" type="application/rss+xml" rel="alternate" title="Latest 10 blog posts (atom)" />
+
+  
+
+  
+
+  
+</head>
+
+<body>
+  <div class="header-container">
+    <header class="inner">
+      
+      <nav>
+        <a class="" href="/">About</a>
+        <!-- <a class="" href="/project/">Project</a> -->
+        <!--<a class="" href="/resume/">Resume</a>-->
+	      <!--<a href="/jiangtao_resume_cn.pdf">Resume</a>-->
+	      <!-- <a href="/Jiangtao_resume.pdf">Resume</a> -->
+        <!--<a class="" href="/publication/">Publication</a>-->
+        <a class="" href="/blog/">Blog</a>
+	      <!-- <a href="/books/">Book</a> -->
+		    <!-- <a href="/timeline/">Times</a> -->
+        <a href="https://github.com/hustjiangtao">Github</a>
+      </nav>
+	  
+
+      <div class="pull-right right logo">
+        <!--<div class="name">
+          <a href="/">Jiangtao</a><br />
+          <small>
+            <em>
+              
+                <a href="/">developer</a>
+              
+            </em>
+          </small>
+        </div>-->
+        <a href="http://hustjiangtao.com/"><img class="avatar" src="/images/sanzang.jpg" alt="My profile picture" /></a>
+      </div>
+      <div class="clear"></div>
+    </header>
+    <div class="clear"></div>
+  </div>
+
+  <link rel="stylesheet" href="../css/blog.css">
+
+
+
+<div id="container">
+<article>
+<div class="inner">
+<div class = "post-header">
+  <h1>
+    数据库MySQL
+  </h1>
+  <ul class="meta">
+  	<i class="fa fa-calendar"></i>
+  	2017年08月01日
+  	<i class="space"></i>
+  	<i class="fa fa-archive"></i>
+  	<a class="tag" href="http://localhost:4000/blog/categories.html#code">code</a>
+  	<i class="space"></i>
+  	<i class="fa fa-tags"></i>
+  	
+  	    <a class="tag" href="http://localhost:4000/tag/#MySQL">MySQL</a>
+  	    <i class="space"></i>
+  	
+  	<i class="space"></i> 字数:863
+  </ul>
+</div>
+</div>
+
+  <div class="post">
+        <div id="content">
+          <div class ="sidebox">
+              <div class ="sidebar">
+              <div class="toc"></div>
+              </div>
+          </div>
+  	   <h1 id="数据库mysql">数据库MySQL</h1>
+
+<hr />
+<ul>
+  <li>登录
+一般安装好MySQL之后先要登录吧，linux系统下：
+    <blockquote>
+      <p>mysql -u root -p</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>这时要你输入密码，
+<img src="./1501582228521.png" alt="Alt text" />
+输入密码就好啦，然后会进入mysql的命令行界面：
+<img src="./1501582260430.png" alt="Alt text" /></p>
+
+<hr />
+<ul>
+  <li>基本使用</li>
+</ul>
+
+<p>1、查看数据库：</p>
+<blockquote>
+  <p>show databases;</p>
+</blockquote>
+
+<p>如果有数据库，就会显示：
+<img src="./1501582336095.png" alt="Alt text" /></p>
+
+<p>2、新建数据库：(若此库不存在)</p>
+<blockquote>
+  <p>create database diyidan_new;</p>
+</blockquote>
+
+<p>3、使用数据库：</p>
+<blockquote>
+  <p>use diyidan_new;
+<img src="./1501582550656.png" alt="Alt text" /></p>
+</blockquote>
+
+<p>4、查看表：</p>
+<blockquote>
+  <p>show tables;
+<img src="./1501582583669.png" alt="Alt text" /></p>
+</blockquote>
+
+<p>如果没有表，则要新建表。
+5、新建表：(若此表不存在)</p>
+<blockquote>
+  <p>create table diyidan_ad(ad_id int auto_increment primary key);</p>
+</blockquote>
+
+<p>新建表时一定要表名称+表数据结构，如果没有表的数据结构，则无法新建表。
+6、删除表：(若表存在)</p>
+<blockquote>
+  <p>drop table diyidan_ab;</p>
+</blockquote>
+
+<p>7、删除库：(若库存在)</p>
+<blockquote>
+  <p>drop database diyidan_new;</p>
+</blockquote>
+
+<p>8、修改表的数据结构：</p>
+<blockquote>
+  <p>新增字段alter table diyidan_ad add ad_name varchar(64);
+删除字段alter table diyidan_ad drop ad_name;
+修改字段alter table diyidan_ad modify ad_name varchar(32);
+增加主键alter table diyidan_ad add primary key(ad_name);
+删除主键alter table diyidan_ad drop primary key(ad_name);</p>
+</blockquote>
+
+<p>9、导入外部数据(一般为.sql文件)：</p>
+<blockquote>
+  <p>source diyidan_data.sql</p>
+</blockquote>
+
+<ul>
+  <li>数据操作</li>
+</ul>
+
+<blockquote>
+  <p>增、删、改、查</p>
+</blockquote>
+
+<p>1、插入：</p>
+<blockquote>
+  <p>insert into diyidan_ad(ad_id, ad_name) values(2, ‘Saya’),(3, ‘Mary’);</p>
+</blockquote>
+
+  	</div>
+	</div>
+</article>
+
+<!--翻页功能-->
+<section class="inner">
+<ul class="pager">
+    
+    <li class="previous">
+       <a href="/blog/jQuery%E5%AE%9E%E7%8E%B0%E4%BB%BB%E6%84%8F%E5%88%97%E8%A1%A8%E6%88%96%E8%A1%A8%E6%A0%BC%E7%9A%84%E6%8E%92%E5%BA%8F.html">←jQuery实现任意列表或表格的排序</a>
+    </li>
+    
+    
+    <li class="next">
+    	<a href="/blog/Python%E9%A1%B9%E7%9B%AE%E7%94%9F%E6%88%90requirements_txt.html">requirements.txt→</a>
+    </li>
+    
+ </ul>
+</section>
+
+<!--评论功能-->
+<section class="comments inner duoshuo">
+<!-- Disqus Comment BEGIN -->
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'jiangtao'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<!-- Disqus Comment END -->
+
+</section>
+</div>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    <!--displayMath: [['$$','$$'], ['\[','\]']],-->
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    // Fix <code> tags after MathJax finishes running. This is a
+    // hack to overcome a shortcoming of Markdown. Discussion at
+    // https://github.com/mojombo/jekyll/issues/199
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+
+
+  <!--<div class="separator"></div>-->
+
+  <footer>
+    <div  style="border-bottom: 1px solid #eee"></div>
+    <p class="linkings">
+        <!-- Friend: Lichao</a>&nbsp&nbsp&nbsp&nbsp<a href="https://yihui.name/cn/">Yihui</a>&nbsp&nbsp&nbsp&nbsp<a href="http://zhangxuezhi.com/">Xuezhi</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.52ml.net/">52ml</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caoyaqiang.com/">cyq</a>&nbsp&nbsp&nbsp&nbsp<a href="http://personal.ee.surrey.ac.uk/Personal/R.Hu/">Rui Hu</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.pyimagesearch.com/">pyimagesearch</a>&nbsp&nbsp&nbsp&nbsp<a href="http://bean.logdown.com/">bean</a>&nbsp&nbsp&nbsp&nbsp<a href="http://ml.memect.com/">ml dairy</a>&nbsp&nbsp&nbsp&nbsp<a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html/">Resources</a> -->
+    </p>
+    <!--p class="linkings">
+        Utils: <a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html">rogerioferis</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caffe.berkeleyvision.org/">Caffe</a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-learn.org/stable/index.html">scikit-learn</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.astroml.org/index.html">AstroML</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-image.org/">scikit-image</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://gitxiv.com/">GitXiv</a>
+    </p-->
+    <p>
+      Made with <a href="http://jekyllrb.com/">Jekyll</a>,
+      hosted on <a href="https://github.com/hustjiangtao/jiangtao.github.io">Github Pages</a>. Inspired by <a href="http://sebastien.saunier.me/">saunier</a>, designed by <a href="http://hustjiangtao.com">Jiangtao</a>.
+    </p>
+    <p>
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Attribution-NonCommercial-ShareAlike 4.0 International</a> 2013-2017
+    </p>
+    <!--ul class="links">
+      <li>
+        <a href="https://github.com/hustjiangtao" title="See my code on GitHub">
+          <i class="icon-github"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/intent/follow?screen_name=yongyuan001" title="Follow me on Twitter">
+          <i class="icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/sebastiensaunier" title="Connect with me on LinkedIn">
+          <i class="icon-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://plus.google.com/+SebastienSaunier?rel=author" title="I need this link for authorship reasons">
+          <i class="icon-google-plus"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://pinboard.in/u:ssaunier" title="Browse my bookmarks about Programming">
+          <i class="icon-bookmarks"></i>
+        </a>
+      </li>
+      <li>
+        <a href="/feed.xml" title="Subscribe to my blog with RSS">
+          <i class="icon-feed"></i>
+        </a>
+      </li>
+    </ul-->
+  </footer>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</body>
+</html>
