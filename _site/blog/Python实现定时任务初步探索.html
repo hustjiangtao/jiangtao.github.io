@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="aexITLS38FdIRzwj25OVWxm87rpa9l-UV0URTyC9cTs" />
   <title>
-    requirements.txt
+    Python实现定时任务的初步探索
     
   </title>
   <link rel="stylesheet" href="../css/site.css">
@@ -68,11 +68,11 @@
 <div class="inner">
 <div class = "post-header">
   <h1>
-    requirements.txt
+    Python实现定时任务的初步探索
   </h1>
   <ul class="meta">
   	<i class="fa fa-calendar"></i>
-  	2017年11月24日
+  	2017年12月14日
   	<i class="space"></i>
   	<i class="fa fa-archive"></i>
   	<a class="tag" href="http://localhost:4000/blog/categories.html#code">code</a>
@@ -82,7 +82,7 @@
   	    <a class="tag" href="http://localhost:4000/tag/#Python">Python</a>
   	    <i class="space"></i>
   	
-  	<i class="space"></i> 字数:311
+  	<i class="space"></i> 字数:2674
   </ul>
 </div>
 </div>
@@ -94,37 +94,59 @@
               <div class="toc"></div>
               </div>
           </div>
-  	   <h1 id="python项目生成requirementstxt">Python项目生成requirements.txt</h1>
+  	   <h2 id="python实现定时任务的初步探索">Python实现定时任务的初步探索</h2>
 
-<ol>
-  <li>virtualenv环境
-    <blockquote>
-      <p>直接在项目目录下使用：pip freeze &gt; requirements.txt</p>
-    </blockquote>
-  </li>
-  <li>非virtualenv环境
-    <blockquote>
-      <p>如果没有使用virtualenv，使用工具pipreqs</p>
-    </blockquote>
-  </li>
-</ol>
+<hr />
+<p>通过sleep来控制定时执行任务，可设置固定时间、固定间隔来执行特定任务</p>
 
-<p>这个工具的好处是可以通过对项目目录的扫描，自动发现使用了那些类库，自动生成依赖清单。缺点是可能会有些偏差，需要检查并自己调整下。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c"># -*- author: Jiangtao -*-</span>
 
-<blockquote>
-  <p>安装# pip install pipreqs</p>
-</blockquote>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
 
-<blockquote>
-  <p>项目目录下执行: pipreqs ./</p>
-</blockquote>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
-<p>执行完毕则自动在当前目录生成requirements.txt文件。</p>
+<span class="k">class</span> <span class="nc">Job</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
-<blockquote>
-  <p>使用requirement.txt
-pip install -r requirements.txt</p>
-</blockquote>
+    <span class="k">def</span> <span class="nf">timing_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">timing</span><span class="p">,</span> <span class="n">set_hour</span><span class="p">):</span>
+        <span class="n">is_running</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">is_running</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_sleep_seconds</span><span class="p">(</span><span class="n">set_hour</span><span class="p">))</span>  <span class="c"># 定时制定</span>
+                <span class="n">job</span><span class="p">()</span>
+            <span class="k">except</span> <span class="nb">KeyboardInterrupt</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'KeyboardInterrupt'</span><span class="p">)</span>
+                <span class="n">is_running</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">except</span> <span class="nb">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'done@</span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="n">timing</span><span class="p">)</span>
+                <span class="c"># is_running = False</span>
+
+    <span class="k">def</span> <span class="nf">get_sleep_seconds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">set_hour</span><span class="p">):</span>
+
+        <span class="s">"""返回距离设定的时间点需要的秒数"""</span>
+
+        <span class="n">current_hour</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">hour</span>
+        <span class="n">delta_hour</span> <span class="o">=</span> <span class="n">set_hour</span> <span class="o">-</span> <span class="n">current_hour</span>
+        <span class="k">if</span> <span class="n">delta_hour</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">delta_hour</span> <span class="o">+=</span> <span class="mi">24</span>
+
+        <span class="n">sleep_seconds</span> <span class="o">=</span> <span class="mi">3600</span> <span class="o">*</span> <span class="n">delta_hour</span>
+
+        <span class="k">return</span> <span class="n">sleep_seconds</span>
+
+</code></pre></div></div>
+
+<p>执行参考：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">timing_run</span><span class="p">(</span><span class="n">job</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sync_zone_stats</span><span class="p">,</span> <span class="n">timing</span><span class="o">=</span><span class="n">DateConstant</span><span class="o">.</span><span class="n">ONE_DAY_SECONDS</span><span class="p">,</span> <span class="n">set_hour</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</code></pre></div></div>
 
   	</div>
 	</div>
@@ -135,13 +157,9 @@ pip install -r requirements.txt</p>
 <ul class="pager">
     
     <li class="previous">
-       <a href="/blog/%E6%95%B0%E6%8D%AE%E5%BA%93MySQL%E6%93%8D%E4%BD%9C.html">←数据库MySQL</a>
+       <a href="/blog/iptables.html">←iptables</a>
     </li>
     
-    
-    <li class="next">
-    	<a href="/blog/%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2%E8%87%B3%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B5%81%E7%A8%8B.html">网站部署至服务器流程→</a>
-    </li>
     
  </ul>
 </section>
