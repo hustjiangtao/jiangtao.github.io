@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google-site-verification" content="aexITLS38FdIRzwj25OVWxm87rpa9l-UV0URTyC9cTs" />
   <title>
-    iptables
+    Python实现定时任务的初步探索
     
   </title>
   <link rel="stylesheet" href="../css/site.css">
@@ -75,21 +75,21 @@
 <div class="inner">
 <div class = "post-header">
   <h1>
-    iptables
+    Python实现定时任务的初步探索
   </h1>
   <ul class="meta">
   	<i class="fa fa-calendar"></i>
-  	2017年12月07日
+  	2017年12月14日
   	<i class="space"></i>
   	<i class="fa fa-archive"></i>
-  	<a class="tag" href="http://localhost:4000/blog/categories.html#Linux">Linux</a>
+  	<a class="tag" href="http://localhost:4000/blog/categories.html#code">code</a>
   	<i class="space"></i>
   	<i class="fa fa-tags"></i>
   	
-  	    <a class="tag" href="http://localhost:4000/tag/#Linux">Linux</a>
+  	    <a class="tag" href="http://localhost:4000/tag/#Python">Python</a>
   	    <i class="space"></i>
   	
-  	<i class="space"></i> 字数:872
+  	<i class="space"></i> 字数:2674
   </ul>
 </div>
 </div>
@@ -101,21 +101,58 @@
               <div class="toc"></div>
               </div>
           </div>
-  	   <h1 id="add-self-conf">Add self-conf</h1>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">*</span>filter
-:INPUT ACCEPT <span class="o">[</span>0:0]
-:FORWARD ACCEPT[0:0]
-:OUTPUT ACCEPT[0:0]
-<span class="nt">-A</span> INPUT <span class="nt">-m</span> state--state RELATED,ESTABLISHED <span class="nt">-j</span> ACCEPT
-<span class="nt">-A</span> INPUT <span class="nt">-p</span> icmp <span class="nt">-jACCEPT</span>
-<span class="nt">-A</span> INPUT <span class="nt">-i</span> lo <span class="nt">-jACCEPT</span>
-<span class="nt">-A</span> INPUT <span class="nt">-p</span> tcp <span class="nt">-mstate</span> <span class="nt">--state</span> NEW <span class="nt">-m</span> tcp <span class="nt">--dport</span> 22 <span class="nt">-j</span> ACCEPT
-<span class="nt">-A</span> INPUT <span class="nt">-p</span> tcp <span class="nt">-m</span> state <span class="nt">--state</span> NEW <span class="nt">-m</span> tcp <span class="nt">--dport</span> 80 <span class="nt">-jACCEPT</span>
-<span class="nt">-A</span> INPUT <span class="nt">-p</span> tcp <span class="nt">-m</span> state <span class="nt">--state</span> NEW <span class="nt">-m</span> tcp <span class="nt">--dport</span> 8080-j ACCEPT
-<span class="nt">-A</span> INPUT <span class="nt">-j</span> REJECT--reject-with icmp-host-prohibited
-<span class="nt">-A</span> FORWARD <span class="nt">-jREJECT</span> <span class="nt">--reject-with</span> icmp-host-prohibited
-<span class="nt">-A</span> INPUT <span class="nt">-p</span> tcp <span class="nt">-m</span> state <span class="nt">--state</span> NEW <span class="nt">-m</span> tcp <span class="nt">--dport</span> 3306 <span class="nt">-j</span> ACCEPT
-COMMIT
+  	   <h2 id="python实现定时任务的初步探索">Python实现定时任务的初步探索</h2>
+
+<hr />
+<p>通过sleep来控制定时执行任务，可设置固定时间、固定间隔来执行特定任务</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c"># -*- author: Jiangtao -*-</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="k">class</span> <span class="nc">Job</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">timing_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">timing</span><span class="p">,</span> <span class="n">set_hour</span><span class="p">):</span>
+        <span class="n">is_running</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">is_running</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_sleep_seconds</span><span class="p">(</span><span class="n">set_hour</span><span class="p">))</span>  <span class="c"># 定时制定</span>
+                <span class="n">job</span><span class="p">()</span>
+            <span class="k">except</span> <span class="nb">KeyboardInterrupt</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'KeyboardInterrupt'</span><span class="p">)</span>
+                <span class="n">is_running</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">except</span> <span class="nb">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'done@</span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+                <span class="n">sleep</span><span class="p">(</span><span class="n">timing</span><span class="p">)</span>
+                <span class="c"># is_running = False</span>
+
+    <span class="k">def</span> <span class="nf">get_sleep_seconds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">set_hour</span><span class="p">):</span>
+
+        <span class="s">"""返回距离设定的时间点需要的秒数"""</span>
+
+        <span class="n">current_hour</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">hour</span>
+        <span class="n">delta_hour</span> <span class="o">=</span> <span class="n">set_hour</span> <span class="o">-</span> <span class="n">current_hour</span>
+        <span class="k">if</span> <span class="n">delta_hour</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">delta_hour</span> <span class="o">+=</span> <span class="mi">24</span>
+
+        <span class="n">sleep_seconds</span> <span class="o">=</span> <span class="mi">3600</span> <span class="o">*</span> <span class="n">delta_hour</span>
+
+        <span class="k">return</span> <span class="n">sleep_seconds</span>
+
+</code></pre></div></div>
+
+<p>执行参考：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">timing_run</span><span class="p">(</span><span class="n">job</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sync_zone_stats</span><span class="p">,</span> <span class="n">timing</span><span class="o">=</span><span class="n">DateConstant</span><span class="o">.</span><span class="n">ONE_DAY_SECONDS</span><span class="p">,</span> <span class="n">set_hour</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 </code></pre></div></div>
 
   	</div>
@@ -127,13 +164,9 @@ COMMIT
 <ul class="pager">
     
     <li class="previous">
-       <a href="/blog/%E5%AE%89%E8%A3%85supervisor.html">←安装supervisor</a>
+       <a href="/blog/iptables.html">←iptables</a>
     </li>
     
-    
-    <li class="next">
-    	<a href="/blog/Python%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%88%9D%E6%AD%A5%E6%8E%A2%E7%B4%A2.html">Python实现定时任务的初步探索→</a>
-    </li>
     
  </ul>
 </section>

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 安装supervisor
-categories: [code]
+categories: [Linux]
 tags: Linux
 ---
 
