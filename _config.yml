@@ -28,3 +28,8 @@ syntax_highlighter: rouge
 # White-listed plugins
 gems:
   - jekyll-sitemap
+
+# Google Adsense
+google:
+    ad-client: "ca-pub-1687850250651196"
+    ad-slot: "8324204667"
