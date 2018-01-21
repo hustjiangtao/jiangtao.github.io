@@ -42,7 +42,7 @@ body {
   font-family:"Avenir Next", Helvetica, Arial, "Lantinghei SC", "Microsoft YaHei", sans-serif;
   text-rendering: optimizeLegibility;
   background-color: #ffffff;
-  margin-bottom: 5px;  /*自定义段落与段落之间的间距*/
+  /*margin-bottom: 5px;  自定义段落与段落之间的间距*/
   /*自定义line-height: 170%; body对象行与行的间距*/
   font-size: 100%;
 }
