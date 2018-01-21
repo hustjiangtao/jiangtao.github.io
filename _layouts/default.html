@@ -118,6 +118,17 @@
     <!--p class="linkings">
         Utils: <a href="http://rogerioferis.com/VisualRecognitionAndSearch2014/Resources.html">rogerioferis</a>&nbsp&nbsp&nbsp&nbsp<a href="http://caffe.berkeleyvision.org/">Caffe</a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-learn.org/stable/index.html">scikit-learn</a>&nbsp&nbsp&nbsp&nbsp<a href="http://www.astroml.org/index.html">AstroML</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://scikit-image.org/">scikit-image</a></a>&nbsp&nbsp&nbsp&nbsp<a href="http://gitxiv.com/">GitXiv</a>
     </p-->
+    {% if page.url == '/cn/' %}
+    <p>
+      本站由 <a href="http://hustjiangtao.com">Jiangtao</a> 设计制作
+    </p>
+    <p>
+      &copy;&nbsp;2013-2018&nbsp;Jiangtao&nbsp;|&nbsp;
+      <a href="/blog/feed.xml" title="Subscribe to my blog with RSS">
+        <i class="fa fa-rss"></i> 点我订阅
+      </a>
+    </p>
+    {% else %}
     <p>
       Designed by <a href="http://hustjiangtao.com">Jiangtao</a>.
     </p>
@@ -127,6 +138,7 @@
         <i class="fa fa-rss"></i> RSS
       </a>
     </p>
+    {% endif %}
     <!--ul class="links">
       <li>
         <a href="https://github.com/hustjiangtao" title="See my code on GitHub">
