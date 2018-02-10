@@ -27,3 +27,7 @@ autorestart=true
 stdout_logfile=/var/log/diyidan/ad.log
 loglevel=info
 ```
+
+# 启动supervisor服务
+** 一定不能使用配置文件(supervisord.conf)启动服务，否者会有一些不知名的问题 **
+> service supervisord restart
