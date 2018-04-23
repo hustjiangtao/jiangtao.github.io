@@ -32,7 +32,7 @@ $ source ~/.zshrc
 ```
 
 ## 参考
-- (如何在mac中用命令行时用sublime打开文件)[https://segmentfault.com/q/1010000002397241]
+- [如何在mac中用命令行时用sublime打开文件](https://segmentfault.com/q/1010000002397241)
 
 
 
